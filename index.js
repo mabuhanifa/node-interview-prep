@@ -12,9 +12,9 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html")); /*same as above*/
 });
 
-app.get("/", (req, res) => {
+app.get("/new.html", (req, res) => {
   // res.sendFile("./views/index.html", { root: __dirname });
-  res.sendFile(path.join(__dirname, "views", "index.html")); /*same as above*/
+  res.sendFile(path.join(__dirname, "views", "new.html")); /*same as above*/
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
