@@ -8,7 +8,13 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.sendFile("./views/index.html", { root: __dirname });
+  // res.sendFile("./views/index.html", { root: __dirname });
+  res.sendFile(path.join(__dirname, "views", "index.html")); /*same as above*/
+});
+
+app.get("/", (req, res) => {
+  // res.sendFile("./views/index.html", { root: __dirname });
+  res.sendFile(path.join(__dirname, "views", "index.html")); /*same as above*/
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
