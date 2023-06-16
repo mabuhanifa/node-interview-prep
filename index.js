@@ -17,12 +17,45 @@ app.get("/new.html", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "new.html")); /*same as above*/
 });
 
-app.get("/hello(.html)?", (req, res,next) => {
-  console.log(`Attempted to access hello.html with url : -> ${req.url}`);
+//route handler
+app.get(
+  "/hello(.html)?",
+  (req, res, next) => {
+    console.log(`Attempted to access hello.html with url : -> ${req.url}`);
+    next();
+  },
+  (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "hello.html"));
+  }
+);
+
+
+//chaining route handlers
+const one = (req, res, next) => {
+  console.log("one");
   next();
-},(req,res)=>{
-  res.sendFile(path.join(__dirname, "views", "hello.html"));
-});
+};
+
+const two = (req, res, next) => {
+  console.log("two");
+  next();
+};
+
+const three = (req, res) => {
+  console.log("three");
+  res.send("Finished!");
+};
+
+
+app.get("/chain(.html)?", [one, two, three]);
+
+
+
+
+
+
+
+
 
 app.get("/*", (req, res) => {
   res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
