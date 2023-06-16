@@ -6,6 +6,10 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
+// 'content-type: application/x-www-form-urlencoded'
+app.use(express.urlencoded({ extended: false }));
+// static files
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.get("/", (req, res) => {
   // res.sendFile("./views/index.html", { root: __dirname });
@@ -29,7 +33,6 @@ app.get(
   }
 );
 
-
 //chaining route handlers
 const one = (req, res, next) => {
   console.log("one");
@@ -46,16 +49,7 @@ const three = (req, res) => {
   res.send("Finished!");
 };
 
-
 app.get("/chain(.html)?", [one, two, three]);
-
-
-
-
-
-
-
-
 
 app.get("/*", (req, res) => {
   res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
