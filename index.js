@@ -5,6 +5,7 @@ const path = require("path");
 const cors = require("cors");
 const registerRouter = require("./routes/registerRoute");
 const authRouter = require("./routes/authRoutes");
+const employeesRouter = require("./routes/employeeRoute");
 
 app.use(cors());
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/employees", employeesRouter);
 app.use("/register", registerRouter);
 app.use("/auth", authRouter);
 
