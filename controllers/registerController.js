@@ -18,6 +18,7 @@ const handleNewUser = async (req, res) => {
 
   // check for duplicate usernames in the db
   const duplicate = userDB.users.find((person) => person.username === user);
+
   if (duplicate) return res.sendStatus(409); //Conflict
 
   try {
@@ -38,6 +39,8 @@ const handleNewUser = async (req, res) => {
 
     res.status(201).json({ success: `New user ${user} created!` });
   } catch (err) {
-    console.log(err);
+    res.status(500).json({ message: err.message });
   }
 };
+
+module.exports = { handleNewUser };

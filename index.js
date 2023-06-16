@@ -3,6 +3,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const path = require("path");
 const cors = require("cors");
+const registerRouter = require("./routes/registerRoute");
 
 app.use(cors());
 app.use(express.json());
@@ -11,6 +12,8 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}}`);
   next();
 });
+
+app.use("/register", registerRouter);
 
 // 'content-type: application/x-www-form-urlencoded'
 app.use(express.urlencoded({ extended: false }));
