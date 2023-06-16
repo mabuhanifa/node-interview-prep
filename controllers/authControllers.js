@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const jwt = require("jsonwebtoken");
 const userDB = {
   users: require("../data/user.json"),
   setUsers: function (data) {
@@ -46,9 +46,16 @@ const handleLogin = async (req, res) => {
       path.join(__dirname, "..", "data", "user.json"),
       JSON.stringify(userDB.users)
     ),
-      res.json({
-        accessToken,
+
+    //cookies options
+      res.cookie("jwt", refreshToken, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
       });
+
+    res.json({
+      accessToken,
+    });
   } else {
     res.sendStatus(401);
   }
