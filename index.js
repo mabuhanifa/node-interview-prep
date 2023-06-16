@@ -17,6 +17,13 @@ app.get("/new.html", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "new.html")); /*same as above*/
 });
 
+app.get("/hello(.html)?", (req, res,next) => {
+  console.log(`Attempted to access hello.html with url : -> ${req.url}`);
+  next();
+},(req,res)=>{
+  res.sendFile(path.join(__dirname, "views", "hello.html"));
+});
+
 app.get("/*", (req, res) => {
   res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
 });
