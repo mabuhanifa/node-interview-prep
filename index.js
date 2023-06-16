@@ -8,6 +8,7 @@ const authRouter = require("./routes/authRoutes");
 const employeesRouter = require("./routes/employeeRoute");
 const cookieParser = require("cookie-parser");
 const refreshRouter = require("./routes/refreshRoutes");
+const logOutRouter = require("./routes/logOutRoutes");
 
 app.use(cors());
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use("/register", registerRouter);
 app.use("/auth", authRouter);
 app.use("/employees", employeesRouter);
 app.use("/refresh", refreshRouter);
+app.use("/logout", logOutRouter);
 
 // 'content-type: application/x-www-form-urlencoded'
 app.use(express.urlencoded({ extended: false }));
