@@ -17,4 +17,8 @@ app.get("/new.html", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "new.html")); /*same as above*/
 });
 
+app.get("/*", (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}...`));
