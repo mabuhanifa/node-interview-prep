@@ -6,18 +6,20 @@ const cors = require("cors");
 const registerRouter = require("./routes/registerRoute");
 const authRouter = require("./routes/authRoutes");
 const employeesRouter = require("./routes/employeeRoute");
+const cookieParser = require("cookie-parser");
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}}`);
   next();
 });
 
-app.use("/employees", employeesRouter);
 app.use("/register", registerRouter);
 app.use("/auth", authRouter);
+app.use("/employees", employeesRouter);
 
 // 'content-type: application/x-www-form-urlencoded'
 app.use(express.urlencoded({ extended: false }));
