@@ -1,0 +1,2 @@
+
+const registerRoute = require('./register');
