@@ -19,7 +19,11 @@ const handleNewUser = async (req, res) => {
   // check for duplicate usernames in the db
   const duplicate = userDB.users.find((person) => person.username === user);
 
-  if (duplicate) return res.sendStatus(409); //Conflict
+  //Conflict
+  if (duplicate)
+    return res.status(400).json({
+      message: `User with username ${user} already exists`,
+    });
 
   try {
     //encrypt the password
